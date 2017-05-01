@@ -9,6 +9,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
+import java.lang.String;
+import java.util.Date;
+import java.io.File;
+import java.net.URI;
+import android.os.Environment;
+import android.content.Intent;
+import android.provider.MediaStore;
+
 
 /* 
 	You can use the Android Extension class in order to hook
@@ -38,11 +46,41 @@ import android.view.View;
 */
 public class AnCam extends Extension {
 	
-	
+	/*
 	public static int sampleMethod (int inputValue) {
 		
 		return inputValue * 100;
 		
+	}
+	*/
+
+	public static void startCam(){
+		
+		Extension.callbackHandler.post(new Runnable() {
+			@Override public void run() {
+
+				/*
+				String name = dateToString(new Date(), "yyyy-MM-dd-hh-mm-ss");
+				destination = new File(Environment.getExternalStorageDirectory(), name + ".jpg");
+				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				intent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(destination));
+		        startActivityForResult(intent, PICK_Camera_IMAGE);
+		        */
+
+		        //
+		        // ref : https://stackoverflow.com/questions/16799818/open-camera-using-intent
+		        // ref : https://stackoverflow.com/questions/10165302/dialog-to-pick-image-from-gallery-or-from-camera
+		        //
+		        Intent iTakePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		        
+		        Context oContext;
+		        oContext= Extension.mainContext;
+		        //oContext.startActivityForResult(takePicture, 0);
+		        oContext.startActivity(iTakePicture);
+
+	    	}
+    	});
+
 	}
 	
 	
