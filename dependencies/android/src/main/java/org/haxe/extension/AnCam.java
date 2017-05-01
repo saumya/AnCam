@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
+import android.util.Log;
+import android.net.Uri;
+
 import java.lang.String;
 import java.util.Date;
 import java.io.File;
@@ -45,14 +48,6 @@ import android.provider.MediaStore;
 	back to Haxe from Java.
 */
 public class AnCam extends Extension {
-	
-	/*
-	public static int sampleMethod (int inputValue) {
-		
-		return inputValue * 100;
-		
-	}
-	*/
 
 	public static void startCam(){
 		
@@ -72,12 +67,31 @@ public class AnCam extends Extension {
 		        // ref : https://stackoverflow.com/questions/10165302/dialog-to-pick-image-from-gallery-or-from-camera
 		        //
 		        Intent iTakePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		        
+		        /*
 		        Context oContext;
 		        oContext= Extension.mainContext;
-		        //oContext.startActivityForResult(takePicture, 0);
 		        oContext.startActivity(iTakePicture);
+		        */
+		        /*
+		        // ref : https://stackoverflow.com/questions/10407159/how-to-manage-startactivityforresult-on-android#10407371
+		        Activity aThis;
+		        aThis = Extension.mainActivity;
+		        aThis.startActivityForResult(iTakePicture, 1);
+		        */
 
+		        Activity aThis;
+		        aThis = Extension.mainActivity;
+
+		        //String path = Environment.getExternalStorageDirectory() + "/CameraImages/example.jpg";
+		        String path = Environment.getExternalStorageDirectory() + "/example.jpg";
+		        //String path = Environment.DIRECTORY_DCIM + "/example.jpg";
+		        //String path = Environment.getExternalStorageDirectory() + "sdcard/DCIM/Camera/example.jpg";
+		        //
+		        File file = new File(path);
+		        Uri outputFileUri = Uri.fromFile( file );
+		        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
+		        intent.putExtra( MediaStore.EXTRA_OUTPUT, outputFileUri );
+		        aThis.startActivityForResult( intent, 1 );
 	    	}
     	});
 
@@ -91,6 +105,20 @@ public class AnCam extends Extension {
 	 */
 	public boolean onActivityResult (int requestCode, int resultCode, Intent data) {
 		
+		//Intent iData = data.getDate()
+
+		Log.d("INFO","=======================================");
+		Log.d("INFO","=======================================");
+		Log.d("INFO","onActivityResult");
+		Log.d("INFO","=======================================");
+		Log.d("INFO","=======================================");
+
+		if(resultCode==1){
+			// Camera
+			Log.d("CAMERA","=======================================");
+			Log.d("CAMERA","=======================================");
+		}
+
 		return true;
 		
 	}
