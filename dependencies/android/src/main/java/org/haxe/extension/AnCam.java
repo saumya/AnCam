@@ -111,7 +111,7 @@ public class AnCam extends Extension {
 		        Uri outputFileUri = Uri.fromFile( file );
 		        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
 		        intent.putExtra( MediaStore.EXTRA_OUTPUT, outputFileUri );
-		        aThis.startActivityForResult( intent, 1 );
+		        aThis.startActivityForResult( intent, 1 );// 1 is requestCode on the callback
 	    	}
     	});
 
@@ -124,27 +124,26 @@ public class AnCam extends Extension {
 	 * from it.
 	 */
 	public boolean onActivityResult (int requestCode, int resultCode, Intent data) {
-		
-		//Intent iData = data.getDate()
-
+		/*
 		Log.d("INFO","=======================================");
 		Log.d("INFO","=======================================");
 		Log.d("INFO","onActivityResult");
 		Log.d("INFO","=======================================");
 		Log.d("INFO","=======================================");
 		
-		/*
+		
 		if(requestCode==1){
 			// Camera
-			Log.d("CAMERA","=======================================");
-			Log.d("CAMERA","=======================================");
+			Log.d("INFO","CAMERA =======================================");
+			Log.d("INFO","CAMERA : requestCode==1 ");
+			Log.d("INFO","CAMERA =======================================");
 		}
 		*/
 
-		AnCam.cbObj.call("onInit",new Object[]{"Back From JAVA"});
+		//AnCam.cbObj.call("onInit",new Object[]{"Back From JAVA"});
+		AnCam.cbObj.call("onCamDone",new Object[]{"Back From JAVA",requestCode,resultCode});
 
 		return true;
-		
 	}
 	
 	

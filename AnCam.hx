@@ -13,9 +13,15 @@ import openfl.utils.JNI;
 */
 
 import lime.system.JNI;
+import openfl.events.Event;
+import openfl.events.EventDispatcher;
 
 
 class AnCam {
+
+	// Event dispatcher composition
+	public static var dispatcher = new EventDispatcher ();
+	public static var CAM_CAPTURED_EVENT = "CAM_CAPTURED_EVENT";
 	
 	/*
 	public static function sampleMethod (inputValue:Int):Int {
@@ -61,11 +67,7 @@ class AnCam {
 	private static var init_JNI = JNI.createStaticMethod ("org.haxe.extension.AnCam", "initCam", "(Lorg/haxe/lime/HaxeObject;)V", true);
 	private static var start_camera_jni = JNI.createStaticMethod("org.haxe.extension.AnCam", "startCam", "(Lorg/haxe/lime/HaxeObject;)V", true);
 	
-	
-	
-
 	#end
-	
 }
 
 private class CamCallbackHandler {
@@ -73,7 +75,12 @@ private class CamCallbackHandler {
 	public function onInit(msg:String):Void{
 		trace('onInit:'+msg);
 	}
-	public function onCamDone(msg:String):Void{
-		trace('onCamDone:'+msg);
+	public function onCamDone(msg:String,requestCode:Int,resultCode,Int):Void{
+		trace('onCamDone:msg:'+msg);
+		trace('onCamDone:requestCode:'+requestCode);
+		trace('onCamDone:resultCode:'+resultCode);
+
+		var e:Event = new Event(AnCam.CAM_CAPTURED_EVENT);
+		AnCam.dispatcher.dispatchEvent(e);
 	}
 }
