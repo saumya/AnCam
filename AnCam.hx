@@ -75,10 +75,11 @@ private class CamCallbackHandler {
 	public function onInit(msg:String):Void{
 		trace('onInit:'+msg);
 	}
-	public function onCamDone(msg:String,requestCode:Int,resultCode,Int):Void{
+	public function onCamDone(msg:String,requestCode:Int,resultCode:Int):Void{
 		trace('onCamDone:msg:'+msg);
 		trace('onCamDone:requestCode:'+requestCode);
 		trace('onCamDone:resultCode:'+resultCode);
+		//trace('onCamDone:imageData:'+imageData);
 
 		var e:Event = new Event(AnCam.CAM_CAPTURED_EVENT);
 		AnCam.dispatcher.dispatchEvent(e);

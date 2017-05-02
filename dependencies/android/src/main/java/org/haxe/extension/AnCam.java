@@ -126,19 +126,14 @@ public class AnCam extends Extension {
 	public boolean onActivityResult (int requestCode, int resultCode, Intent data) {
 		/*
 		Log.d("INFO","=======================================");
-		Log.d("INFO","=======================================");
-		Log.d("INFO","onActivityResult");
-		Log.d("INFO","=======================================");
-		Log.d("INFO","=======================================");
-		
-		
 		if(requestCode==1){
 			// Camera
 			Log.d("INFO","CAMERA =======================================");
-			Log.d("INFO","CAMERA : requestCode==1 ");
-			Log.d("INFO","CAMERA =======================================");
 		}
 		*/
+
+		//image data : ref : http://stackoverflow.com/questions/14558240/onactivityresult-returned-from-a-camera-intent-null
+		//data.getExtras().get("data");
 
 		//AnCam.cbObj.call("onInit",new Object[]{"Back From JAVA"});
 		AnCam.cbObj.call("onCamDone",new Object[]{"Back From JAVA",requestCode,resultCode});
