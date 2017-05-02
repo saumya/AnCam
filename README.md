@@ -13,6 +13,11 @@ Available Methods
  - `initCamera()Void` : just a test
  - `startCamera():Void` : fires up camera and takes picture
 
+### Usage
+ - Call it like `AnCam.startCamera();`
+ - Listen to the event as `AnCam.dispatcher.addEventListener(AnCam.CAM_CAPTURED_EVENT,onCamCaptured);`
+ - [Example implementation][6] is here
+
 ### Notes
 
  - The JNI [short code reference][3]
@@ -34,3 +39,4 @@ Available Methods
 [3]: https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/types.html
 [4]: http://www.stencyl.com/help/viewPrint/229
 [5]: https://github.com/saumya/RayToast
+[6]: https://github.com/saumya/OpenFL-AnExt
