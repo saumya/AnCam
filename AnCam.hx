@@ -51,11 +51,29 @@ class AnCam {
 
 	#if android
 
-	public static function startCamera():Void {
-	    start_camera_jni();
+	public static function initCamera():Void {
+	    init_JNI([new CamCallbackHandler()]);
 	}
-	private static var start_camera_jni = JNI.createStaticMethod("org.haxe.extension.AnCam", "startCam", "()V");
+	public static function startCamera():Void {
+		start_camera_jni( [new CamCallbackHandler()] );
+	}
+
+	private static var init_JNI = JNI.createStaticMethod ("org.haxe.extension.AnCam", "initCam", "(Lorg/haxe/lime/HaxeObject;)V", true);
+	private static var start_camera_jni = JNI.createStaticMethod("org.haxe.extension.AnCam", "startCam", "(Lorg/haxe/lime/HaxeObject;)V", true);
 	
+	
+	
+
 	#end
 	
+}
+
+private class CamCallbackHandler {
+	public function new () { }
+	public function onInit(msg:String):Void{
+		trace('onInit:'+msg);
+	}
+	public function onCamDone(msg:String):Void{
+		trace('onCamDone:'+msg);
+	}
 }

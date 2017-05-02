@@ -20,6 +20,9 @@ import android.os.Environment;
 import android.content.Intent;
 import android.provider.MediaStore;
 
+// ref: https://github.com/openfl/extension-iap/blob/master/dependencies/android/src/org/haxe/extension/iap/InAppPurchase.java
+import org.haxe.lime.HaxeObject;
+
 
 /* 
 	You can use the Android Extension class in order to hook
@@ -49,9 +52,26 @@ import android.provider.MediaStore;
 */
 public class AnCam extends Extension {
 
-	public static void startCam(){
-		
-		Extension.callbackHandler.post(new Runnable() {
+	private static HaxeObject cbObj = null;
+
+	public static void initCam(final HaxeObject callBackObj){
+		AnCam.cbObj = callBackObj;
+
+		Extension.mainActivity.runOnUiThread(new Runnable() {
+			@Override public void run() {
+				Log.d("INFO","=======================================");
+				Log.d("INFO","initCam");
+				Log.d("INFO","=======================================");
+				AnCam.cbObj.call("onInit",new Object[]{"Back From JAVA"});
+			}
+		});
+	}
+
+	public static void startCam(final HaxeObject callBackObj){
+		AnCam.cbObj = callBackObj;
+
+		//Extension.callbackHandler.post(new Runnable() {
+		Extension.mainActivity.runOnUiThread(new Runnable() {
 			@Override public void run() {
 
 				/*
@@ -112,12 +132,16 @@ public class AnCam extends Extension {
 		Log.d("INFO","onActivityResult");
 		Log.d("INFO","=======================================");
 		Log.d("INFO","=======================================");
-
-		if(resultCode==1){
+		
+		/*
+		if(requestCode==1){
 			// Camera
 			Log.d("CAMERA","=======================================");
 			Log.d("CAMERA","=======================================");
 		}
+		*/
+
+		AnCam.cbObj.call("onInit",new Object[]{"Back From JAVA"});
 
 		return true;
 		
