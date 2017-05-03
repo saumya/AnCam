@@ -15,9 +15,14 @@ Available Methods
  - `captureImageAs(imgName:String):Void` : **Mostly needed this one**. It takes the image name as a parameter and saves it
 
 ### Usage
- - Call it like `AnCam.startCamera();`
+ - Call it like `AnCam.captureImageAs("myPhoto");`
  - Listen to the event as `AnCam.dispatcher.addEventListener(AnCam.CAM_CAPTURED_EVENT,onCamCaptured);`
- - [Example implementation][6] is here
+ - [Complete Example implementation is here][6]
+
+ ```
+ AnCam.dispatcher.addEventListener(AnCam.CAM_CAPTURED_EVENT,onCamCaptured);
+ AnCam.captureImageAs("myPhoto");// it will be saved as myPhoto.jpg
+ ```
 
 ### Notes
 
