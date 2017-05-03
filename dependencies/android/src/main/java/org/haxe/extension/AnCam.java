@@ -117,15 +117,15 @@ public class AnCam extends Extension {
 
 	}
 
-	//public static void saveCamImage(final String imageName, final HaxeObject callBackObj){
-	public static void saveCamImage(final String imageName){
+	public static void saveCamImage(final String imageName, final HaxeObject callBackObj){
+	//public static void saveCamImage(final String imageName){
 		
 		Log.d("INFO","saveCamImage =======================================");
 		Log.d("INFO","saveCamImage:imageName:"+imageName);
 		Log.d("INFO","saveCamImage =======================================");
 
 		
-		//AnCam.cbObj = callBackObj;
+		AnCam.cbObj = callBackObj;
 
 		Extension.mainActivity.runOnUiThread(new Runnable() {
 			@Override public void run() {

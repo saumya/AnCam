@@ -68,24 +68,29 @@ class AnCam {
 
 	public static function captureImageAs(imgName:String):Void{
 		//trace('captureImageAs : '+imgName);
-
+		
+		/*
 		AnCam.imageName = imgName;
 		init_JNI([new CamCallbackHandler()]);
-		
+		*/
+
 		//start_camera_jni( [new CamCallbackHandler()] );
-		//save_image_as_jni( imgName , [new CamCallbackHandler()] );
+		save_image_as_jni( imgName , new CamCallbackHandler() );
 		//save_image_as_jni( imgName );
 	}
 	public static function onInitDone():Void{
+		trace('onInitDone:image:');
 		//trace('onInitDone:image:'+AnCam.imageName);
 		//trace(save_image_as_jni);
-		save_image_as_jni( AnCam.imageName );
+		//save_image_as_jni( AnCam.imageName );
 	}
 
 	private static var init_JNI = JNI.createStaticMethod ("org.haxe.extension.AnCam", "initCam", "(Lorg/haxe/lime/HaxeObject;)V", true);
 	private static var start_camera_jni = JNI.createStaticMethod("org.haxe.extension.AnCam", "startCam", "(Lorg/haxe/lime/HaxeObject;)V", true);
 	//private static var save_image_as_jni = JNI.createStaticMethod("org.haxe.extension.AnCam", "saveCamImage", "(Ljava/lang/String;Lorg/haxe/lime/HaxeObject;)V", true);
-	private static var save_image_as_jni = JNI.createStaticMethod("org.haxe.extension.AnCam", "saveCamImage", "(Ljava/lang/String;)V", false);
+	private static var save_image_as_jni = JNI.createStaticMethod("org.haxe.extension.AnCam", "saveCamImage", "(Ljava/lang/String;Lorg/haxe/lime/HaxeObject;)V", false);// last arguement is false, because we are not sending an Array
+	
+	//private static var save_image_as_jni = JNI.createStaticMethod("org.haxe.extension.AnCam", "saveCamImage", "(Ljava/lang/String;)V", false);
 	
 	#end
 }
