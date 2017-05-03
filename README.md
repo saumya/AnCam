@@ -12,6 +12,7 @@ For the basics of an Android extension, [have a look at RayToast][5]
 Available Methods
  - `initCamera()Void` : just a test
  - `startCamera():Void` : fires up camera and takes picture
+ - `captureImageAs(imgName:String):Void` : **Mostly needed this one**. It takes the image name as a parameter and saves it
 
 ### Usage
  - Call it like `AnCam.startCamera();`
