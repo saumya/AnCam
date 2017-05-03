@@ -20,19 +20,26 @@ Available Methods
   2. Listen to the event as `AnCam.dispatcher.addEventListener(AnCam.CAM_CAPTURED_EVENT,onCamCaptured);`
  - [Complete Example implementation is here][6]
  - Sample code for implementation is as below
+ 
  ```
- // add the event listener
- AnCam.dispatcher.addEventListener(AnCam.CAM_CAPTURED_EVENT,onCamCaptured);
- // capture the image and save it
- AnCam.captureImageAs("myPhoto");// it will be saved as myPhoto.jpg
- // load it in the application
- private function onCamCaptured(e:Event):Void{
-	var sCamImage:String = System.userDirectory + 'myPhoto' +'.jpg';
-	var r:URLRequest = new URLRequest(sCamImage);
-	var loaderImage:Loader = new Loader();
-	loaderImage.load(r);
-	addchild(loaderImage);
-}
+	// add the event listener
+	AnCam.dispatcher.addEventListener(AnCam.CAM_CAPTURED_EVENT,onCamCaptured);
+ ```
+ 
+ ```
+	// capture the image and save it
+	AnCam.captureImageAs("myPhoto");// it will be saved as myPhoto.jpg
+ ```
+
+ ```
+	// load it in the application
+	private function onCamCaptured(e:Event):Void{
+		var sCamImage:String = System.userDirectory + 'myPhoto' +'.jpg';
+		var r:URLRequest = new URLRequest(sCamImage);
+		var loaderImage:Loader = new Loader();
+		loaderImage.load(r);
+		addchild(loaderImage);
+	}
  ```
 
 ### Notes
