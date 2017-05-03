@@ -86,7 +86,7 @@ public class AnCam extends Extension {
 		        // ref : https://stackoverflow.com/questions/16799818/open-camera-using-intent
 		        // ref : https://stackoverflow.com/questions/10165302/dialog-to-pick-image-from-gallery-or-from-camera
 		        //
-		        Intent iTakePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		        //Intent iTakePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		        /*
 		        Context oContext;
 		        oContext= Extension.mainContext;
@@ -116,6 +116,33 @@ public class AnCam extends Extension {
     	});
 
 	}
+
+	//public static void saveCamImage(final String imageName, final HaxeObject callBackObj){
+	public static void saveCamImage(final String imageName){
+		
+		Log.d("INFO","saveCamImage =======================================");
+		Log.d("INFO","saveCamImage:imageName:"+imageName);
+		Log.d("INFO","saveCamImage =======================================");
+
+		
+		//AnCam.cbObj = callBackObj;
+
+		Extension.mainActivity.runOnUiThread(new Runnable() {
+			@Override public void run() {
+				//==================================================
+				String path = (Environment.getExternalStorageDirectory() + "/" + imageName + ".jpg" ) ;
+				File file = new File(path);
+				Uri outputFileUri = Uri.fromFile( file );
+
+				Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+				intent.putExtra( MediaStore.EXTRA_OUTPUT, outputFileUri );
+
+				Extension.mainActivity.startActivityForResult( intent, 1 );
+				//====================================================
+			}
+		});
+		
+	}
 	
 	
 	/**
@@ -137,6 +164,7 @@ public class AnCam extends Extension {
 
 		//AnCam.cbObj.call("onInit",new Object[]{"Back From JAVA"});
 		AnCam.cbObj.call("onCamDone",new Object[]{"Back From JAVA",requestCode,resultCode});
+		//AnCam.cbObj.call("onCamPicSaved",new Object[]{});
 
 		return true;
 	}
